@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="board">
+    <div class="column" id="todo" data-status="1" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+        <h2>Boxes To Do</h2>
+        <p>Each entry = <br />1 nest box</p>
+        <hr />
+        <div class="tasks-in-btn">
+            <!--<input type="text" id="taskInput" class="task-input"
+            placeholder="Enter a task..."
+            oninput="capitalizeInput(this)" />-->
+            <select id="taskInput" class="task-input">
+                <option value="1">Barn Owl</option>
+                <option value="2">Tawny Owl</option>
+                <option value="3">Kestrel</option>
+            </select>
+
+            <button class="add-task-btn" onclick="addTask('todo')">+</button>
+        </div>
+        <div class="task-container"></div>
+
+    </div>
+
+
+    <div class="column" id="in-progress"
+         data-status="2"
+         ondrop="drop(event, 'in-progress')"
+         ondragover="allowDrop(event)">
+        <h2>In Progress</h2>
+        <hr />
+        <div class="task-container"></div>
+
+    </div>
+    <div class="column" id="done"
+         data-status="3"
+         ondrop="drop(event, 'done')"
+         ondragover="allowDrop(event)">
+        <h2>Done</h2>
+        <hr />
+        <div class="task-container"></div>
+
+    </div>
+    <div class="column" id="done-instore"
+         data-status="4"
+         ondrop="drop(event, 'done-instore')"
+         ondragover="allowDrop(event)">
+        <h2>In Storeroom</h2>
+        <hr />
+        <div class="task-container"></div>
+
+    </div>
+
+</div>
+
+
+
+
+

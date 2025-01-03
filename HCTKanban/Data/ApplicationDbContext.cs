@@ -9,6 +9,8 @@ namespace HCTKanban.Data
 		{
 		}
 
+		public DbSet<ApplicationUser> Users { get; set; }
+
 		public DbSet<Locations> Locations { get; set; }
 
 		public DbSet<BirdBox> BirdBox { get; set; }

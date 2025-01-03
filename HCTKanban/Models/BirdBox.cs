@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
 
 namespace HCTKanban.Models
 {
@@ -14,6 +17,7 @@ namespace HCTKanban.Models
 		public ICollection<BirdBox> BirdBoxes { get; } = new List<BirdBox>();
 	}
 
+	
 	public class BirdBox
 	{
 		[Key]

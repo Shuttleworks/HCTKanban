@@ -22,17 +22,39 @@ body {
         margin-right: 10px;
     }
 
+    .head img.logout{
+        margin-left:100px;
+    }
+
+        .head img.logout:hover {
+            filter: url('/images/logout.svg#hover-filter');
+        }
+        .head img.refresh {
+            margin-right: 100px;
+        }
+
+            .head img.refresh:hover {
+                filter: url('/images/logout.svg#hover-filter');
+            }
+
     .head h1 {
         font-size: 1em;
         margin: 0;
         
     }
 
+
+
 .board {
     display: flex;
     flex-wrap: wrap;
     /*justify-content: space-around;*/
     padding: 10px;
+}
+
+.login {
+    padding: 10px;
+
 }
 
 .column hr {
@@ -43,7 +65,7 @@ body {
 .column {
     /* width: 20%; */
     width: calc(100% - 20px);
-    max-width: 100px;
+    max-width: 111px;
     margin: 10px;
     background-color: #fff;
     border-radius: 10px;
@@ -144,12 +166,14 @@ body {
 
 .noportrait{
     display:none;
+    text-align:center;
 }
 
 
 @media only screen and (max-width: 500px) {
     /* For mobile phones: */
     .noportrait {
+        padding-top:5px;
         display: block;
         color:red;
     }

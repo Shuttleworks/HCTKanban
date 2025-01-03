@@ -3,11 +3,22 @@
 let tasks = [];
 getData();
 
-//console.log('attempt to get data');
-//getData();
+
 
 document.addEventListener("DOMContentLoaded", function () {
     renderTasks(tasks);
+});
+
+const logoutButton = document.getElementById("logout");
+
+logoutButton.addEventListener('click', function (event) {
+    window.location.href = '/login/logout';
+});
+
+const refreshButton = document.getElementById("refresh");
+
+refreshButton.addEventListener('click', function (event) {
+    getData();
 });
 
 //Function to render tasks on the board
@@ -18,7 +29,6 @@ function renderTasks(taskstorender) {
         const column = document.getElementById(columnId);
         column.querySelector('.task-container').innerHTML = '';
         dataId = column.dataset.status;
-        //alert(dataId);
 
         taskstorender.forEach(task => {
             if (task.status === dataId) {
@@ -50,9 +60,9 @@ function deleteTask(taskId) {
     
     if (confirm('Are you sure you want to remove this box?')) {
         tasks = tasks.filter(task => task.id !== taskId);
-        updateLocalStorage(tasks);
+        //updateLocalStorage(tasks);
         ajaxDeleteBox(taskId);
-        renderTasks(tasks);
+        //renderTasks(tasks);
     }
     
 }
@@ -83,10 +93,6 @@ function drop(event, columnId) {
     }
 }
 
-function capitalizeInput(input) {
-    input.value = input.value.toUpperCase();
-}
-
 function addTask(columnId) {
     const taskInput = document.getElementById('taskInput');
    
@@ -101,33 +107,29 @@ function addTask(columnId) {
         };
         tasks.push(newTask);
         ajaxNewBoxRequest(taskContent, taskId);
-        //updateLocalStorage();
-       // renderTasks();
+      
         taskInput.value = "";
     }
 }
 
 //Function to update task status when moved to another column
 function updateTaskStatus(taskId, newStatus) {
-    console.log(newStatus);
+   
     tasks = tasks.map(task => {
-        console.log(task)
-        console.log(taskId)
+
         if (task.id === taskId) {
-            console.log("inside id")
+
             return { ...task, status: newStatus };
         }
         return task;
     });
-   // updateLocalStorage();
 
 }
 
 //Function to update local storage with current tasks
 function updateLocalStorage(localtasks) {
-    console.log("task updated");
     localStorage.setItem('tasks', JSON.stringify(localtasks));
-    console.log(JSON.stringify(localtasks));
+    //console.log(JSON.stringify(localtasks));
 }
 
 function ajaxNewBoxRequest(boxtype, taskId) {
@@ -143,8 +145,10 @@ function ajaxNewBoxRequest(boxtype, taskId) {
     xhr.onload = function () {
         console.log("status" + xhr.status);
         if (xhr.status === 200) {
-            console.log("Post successfully created!")
+            //console.log("Post successfully created!")
             getData();
+        } else {
+            console.log(xhr.status);
         }
     }
 }
@@ -161,8 +165,10 @@ function ajaxSendBoxStatus(taskId, statusId) {
     xhr.send(post);
     xhr.onload = function () {
         if (xhr.status === 200) {
-            console.log("Post successful")
+           // console.log("Post successful")
             getData();
+        } else {
+            console.log(xhr.status);
         }
     }
 }
@@ -180,26 +186,14 @@ function ajaxDeleteBox(taskId) {
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log("Delete successful")
+            getData();
+        } else {
+            console.log(xhr.status);
         }
     }
 }
 
-function ajaxGetBoxData(taskId) {
 
-    let postObj = taskId;
-
-    let post = JSON.stringify(postObj)
-    const url = "/state/deleteBox"
-    let xhr = new XMLHttpRequest()
-    xhr.open('POST', url, true)
-    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
-    xhr.send(post);
-    xhr.onload = function () {
-        if (xhr.status === 201) {
-            console.log("Post successful")
-        }
-    }
-}
 
 function getData() {
     // create XHR object
@@ -210,12 +204,14 @@ function getData() {
     // the function called when an xhr transaction is completed
     xhr.onload = function () {
         if (xhr.status == 200) {
-            console.log('Got data');
+            //console.log('Got data');
             //console.log(xhr.responseText);
             tasks = JSON.parse(xhr.responseText);
             renderTasks(tasks);
             updateLocalStorage(tasks);
 
+        } else {
+            console.log(xhr.status);
         }
     }
     // the function that sends the request

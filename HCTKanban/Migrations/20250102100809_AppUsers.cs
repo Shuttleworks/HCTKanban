@@ -37,7 +37,7 @@ namespace HCTKanban.Migrations
 				columns: new[] { "UserId", "Name", "Email", "Password", "Salt" },
 				values: new object[,]
 				{
-					{ 1, "BirdBox Builder", "git@initialized.co.uk", "temp", "temp" }
+					{ 1, "BirdBox Builder", "git@test.co.uk", "temp", "temp" }
 
 				});
 		}
